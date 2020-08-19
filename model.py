@@ -1,7 +1,8 @@
-import pygame, random
+import pygame
+import random
 
-#DINO_CROUCHED_DIM: 25, 25
-#DINO_UPRIGHT_DIM: 50, 25
+# DINO_CROUCHED_DIM: 25, 25
+# DINO_UPRIGHT_DIM: 50, 25
 
 MIN_HEIGHT = 20
 MAX_HEIGHT = 130
@@ -30,8 +31,6 @@ class GameModel:
     def makeNewPtero(self):
         self.ptero.append(Pterodactyl(30, 60, random.randrange(370, 475)))
 
-
-
     def check_collisions(self):
         for cactus in self.cacti:
             if self.dino.rect.colliderect(cactus.rect):
@@ -39,7 +38,6 @@ class GameModel:
         for ptero in self.ptero:
             if self.dino.rect.colliderect(ptero.rect):
                 self.game_over = True
-
 
     def doTick(self):
         self.tick += 1
@@ -73,7 +71,7 @@ class Dinosaur:
         self.jump_height = 0
         self.height = height
         self.width = width
-        self.rect = pygame.Rect(200, 500-height, width, height)
+        self.rect = pygame.Rect(200, 500 - height, width, height)
         self.vel = 0
 
     def start_squat(self):
@@ -96,7 +94,7 @@ class Dinosaur:
         self.rect.move_ip(0, self.vel)
         if self.jump_height <= 0:
             self.vel += self.accel
-        self.rect = pygame.Rect(200, 500-self.height + self.jump_height, self.width, self.height)
+        self.rect = pygame.Rect(200, 500 - self.height + self.jump_height, self.width, self.height)
 
     def jump(self, init_vel):
         if self.jump_height == 0:
@@ -109,10 +107,11 @@ class Pterodactyl:
         self.image.set_colorkey((255, 255, 255))
         self.height = height
         self.width = width
-        self.rect = pygame.Rect(800, y-height, width, height)
+        self.rect = pygame.Rect(800, y - height, width, height)
 
     def move_left(self, amount):
         self.rect.move_ip(-amount, 0)
+
 
 class Cactus:
     def __init__(self, height, width):
@@ -121,7 +120,7 @@ class Cactus:
         self.image = pygame.transform.scale(self.image, (width, height))
         self.height = height
         self.width = width
-        self.rect = pygame.Rect(800, 500-height, width, height)
+        self.rect = pygame.Rect(800, 500 - height, width, height)
 
     def move_left(self, amount):
         self.rect.move_ip(-amount, 0)
